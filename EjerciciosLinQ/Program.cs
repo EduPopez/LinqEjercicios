@@ -456,11 +456,82 @@ Console.WriteLine("First or FirstDefault (el primero)");
 Console.WriteLine("Last or LastDefault (el ultimo)");
 List<int> integerList = new List<int>() { 32, 43, 566, 76, 34, 566, 43, 45};
 
-int resultInteger = integerList.FirstOrDefault(x => x % 6 == 0, 99999);
+int resultInteger = integerList.FirstOrDefault(x => x % 6 == 0);
 
 Console.WriteLine(resultInteger.ToString());
 Console.WriteLine();
 
+Console.WriteLine("Single or SingleOrDefault");
+Console.WriteLine("este es especial, solo tiene que existir uno en la lista, caso contrario genera error.");
 var empleadoUnico = employeesList.Single(x => x.Id == 1);
+
+Console.WriteLine();
+Console.WriteLine();
+
+
+
+Console.WriteLine("Otros operadores");
+
+//Equality Operator
+//  SequenceEqual
+//Concatenation Operator
+//  Concat
+//Set Operators
+//  Distinct
+//  Except
+//  Intersect
+//  Union
+//Generation Operators
+//  DefaultIfempty
+//  Empty
+//  Range
+//  Repeat
+//Aggregate Operators
+//  Aggregate
+//  Average
+//  Count
+//  Sum
+//  Max
+//Parttioning Operators
+//  Skip
+//  SkipWhile
+//  Take
+//  TakeWhile
+//Conversion Operators
+//  ToList
+//  ToDictionary
+//  ToArray
+//Projection Operatores
+//  Select 
+//  SelectMany
+Console.WriteLine();
+Console.WriteLine("Sequence Equal: Verifica que todos los elementos de una lista sean iguales a los de otra lista con el mismo valor y mismo orden.");
+
+var integerList01 = new List<int>() { 2, 3, 4, 5, 6 };
+var integerList02 = new List<int>() { 1, 2, 3, 4, 5, 6 };
+
+var boolSequenceEqual = integerList01.SequenceEqual(integerList02);
+
+employeesList.Clear();
+employeesList = Data.Data.ObtenerEmpleados();
+
+departamentsList.Clear();
+departamentsList = Data.Data.ObtenerDepartamentos();
+
+var employeesList01 = Data.Data.ObtenerEmpleados();
+
+var boolSequenceEmpleados = employeesList.SequenceEqual(employeesList01);
+
+
+Console.WriteLine(boolSequenceEmpleados);
+
+Console.WriteLine();
+Console.WriteLine("Concat: Une en una sola lista dos listas.");
+
+var integerResultante = integerList01.Concat(integerList02);
+
+
+Console.WriteLine(string.Join(" - ", integerResultante));
+
 
 Console.ReadKey();
