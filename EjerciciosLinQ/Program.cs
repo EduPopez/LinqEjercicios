@@ -533,5 +533,41 @@ var integerResultante = integerList01.Concat(integerList02);
 
 Console.WriteLine(string.Join(" - ", integerResultante));
 
+Console.WriteLine();
+
+Console.WriteLine("Aggregate: aplica un acumulador sobre una secuencia.\r\nsimulamos un ejercicio de pago de fin de año mas doble aguinaldo");
+
+var costoTotalAnualTodosLosEmpleados = employeesList.Aggregate<Employee, decimal>(0, (salarioAnual, e) =>
+{
+    var bono = e.EsAdministrador ? (e.SalarioAnual / 12) + 1000 : (e.SalarioAnual / 12) + 500;
+
+    salarioAnual = (e.SalarioAnual + bono) + salarioAnual;
+
+    return salarioAnual;
+});
+
+Console.WriteLine(costoTotalAnualTodosLosEmpleados);
+
+Console.WriteLine();
+Console.WriteLine("Lo hagamos con lista y nombres.");
+
+var detalle = employeesList.Aggregate<Employee, string, string>("Detalle por Empleado: ",
+    (s, e) =>
+    {
+        var bono = e.EsAdministrador ? (e.SalarioAnual / 12) + 1000 : (e.SalarioAnual / 12) + 500;
+
+        s += $"{e} -> {e.SalarioAnual} + {bono} = {e.SalarioAnual + bono}, ";
+
+        return s;
+    }, s => s.Substring(0, s.Length - 2));
+
+Console.WriteLine(detalle);
+
+Console.WriteLine();
+
+Console.WriteLine("Sacamos ahora el promedio de los administradores.");
+var sueldoAdministradores = employeesList.Where(e => e.EsAdministrador == true).Average(e => e.SalarioAnual);
+
+Console.WriteLine($"De los administradores es {sueldoAdministradores}.");
 
 Console.ReadKey();
