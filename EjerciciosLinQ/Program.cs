@@ -492,7 +492,7 @@ Console.WriteLine("Otros operadores");
 //  Count
 //  Sum
 //  Max
-//Parttioning Operators
+//Partitioning Operators
 //  Skip
 //  SkipWhile
 //  Take
@@ -569,5 +569,70 @@ Console.WriteLine("Sacamos ahora el promedio de los administradores.");
 var sueldoAdministradores = employeesList.Where(e => e.EsAdministrador == true).Average(e => e.SalarioAnual);
 
 Console.WriteLine($"De los administradores es {sueldoAdministradores}.");
+
+Console.WriteLine();
+Console.WriteLine("Generetation Operators");
+Console.WriteLine("");
+Console.WriteLine("Empty");
+
+IEnumerable<Employee> employeesEmpty = Enumerable.Empty<Employee>();
+
+if (employeesEmpty == null)
+{
+    Console.WriteLine("Es null.");
+}
+else
+{
+    Console.WriteLine("No es null");
+}
+Console.WriteLine();
+Console.WriteLine("Range");
+
+var intCollection = Enumerable.Range(20, 12);
+foreach (var item in intCollection)
+{
+    Console.WriteLine($"{item}");
+}
+
+Console.WriteLine();
+Console.WriteLine("Repeat");
+
+var strCollection = Enumerable.Repeat<string>("Gato Lolo", 8);
+foreach (var item in strCollection)
+{
+    Console.WriteLine(item);
+}
+
+Console.WriteLine();
+Console.WriteLine("Set Operators - Distinct, except, Intersect, Union");
+Console.WriteLine("Aplica la teoria de conjuntos");
+
+Console.WriteLine();
+
+Console.WriteLine("Distinct eliminina los repetidos.");
+Console.WriteLine();
+
+Console.WriteLine("Except: Elimina los items repetidos en una lista tomando como referencia otra lista.");
+IEnumerable<int> coleccion01 = new List<int>() { 1, 2, 3, 4, 5};
+IEnumerable<int> coleccion02 = new List<int>() { 3, 4, 6 };
+
+var resultexcept = coleccion01.Union(coleccion02);
+foreach (var item in resultexcept) 
+{
+    Console.WriteLine(item);
+}
+
+Console.WriteLine();
+Console.WriteLine("Creando un diccionario ...");
+
+Dictionary<int, Employee> diccionario = (from emp in employeesList
+                                         select emp).ToDictionary<Employee, int>(e => e.Id);
+
+foreach (var key in diccionario.Keys)
+{
+    Console.WriteLine($"Key: {key}, Value: {diccionario[key]}");
+}
+
+Console.WriteLine();
 
 Console.ReadKey();
